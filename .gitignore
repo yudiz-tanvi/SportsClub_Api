@@ -3,3 +3,7 @@
 ################################################################################
 
 /Api_SportsClub.api/.vs
+/.vs
+/Api_SportsClub.api/Api_SportsClub.api/bin/Debug/netcoreapp3.1
+/Api_SportsClub.api/Api_SportsClub.api/obj
+/Api_SportsClub.api/Api_SportsClub.repository/obj
