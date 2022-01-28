@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api_SportsClub.api", "Api_SportsClub.api\Api_SportsClub.api.csproj", "{720CE381-DD9C-43E6-97C3-3E6C6C731675}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sportsclub_management.api", "Api_SportsClub.api\sportsclub_management.api.csproj", "{720CE381-DD9C-43E6-97C3-3E6C6C731675}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{CF3575E9-5BFA-4688-951E-406A11FABD7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api_SportsClub.repository", "Api_SportsClub.repository\Api_SportsClub.repository.csproj", "{844FF357-1030-4827-80B9-71430E8C2495}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sportsclub_management.repository", "Api_SportsClub.repository\sportsclub_management.repository.csproj", "{844FF357-1030-4827-80B9-71430E8C2495}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api_SportsClub.models", "Api_SportsClub.models\Api_SportsClub.models.csproj", "{5A3E72C1-B56A-4107-81F7-16FAA3CAC6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sportsclub_management.models", "Api_SportsClub.models\sportsclub_management.models.csproj", "{5A3E72C1-B56A-4107-81F7-16FAA3CAC6C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

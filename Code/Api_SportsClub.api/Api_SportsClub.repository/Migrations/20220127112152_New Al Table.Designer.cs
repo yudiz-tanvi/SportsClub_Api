@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api_SportsClub.repository.Migrations
 {
-    [DbContext(typeof(ApiSportsClubContext))]
+    [DbContext(typeof(SportsClubManagementContext))]
     [Migration("20220127112152_New Al Table")]
     partial class NewAlTable
     {

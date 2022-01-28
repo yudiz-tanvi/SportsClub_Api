@@ -1,0 +1,10 @@
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\bin\Debug\netcoreapp3.1\sportsclub_management.models.deps.json
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\bin\Debug\netcoreapp3.1\sportsclub_management.models.dll
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\bin\Debug\netcoreapp3.1\sportsclub_management.models.pdb
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\obj\Debug\netcoreapp3.1\sportsclub_management.models.csproj.AssemblyReference.cache
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\obj\Debug\netcoreapp3.1\sportsclub_management.models.GeneratedMSBuildEditorConfig.editorconfig
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\obj\Debug\netcoreapp3.1\sportsclub_management.models.AssemblyInfoInputs.cache
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\obj\Debug\netcoreapp3.1\sportsclub_management.models.AssemblyInfo.cs
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\obj\Debug\netcoreapp3.1\sportsclub_management.models.csproj.CoreCompileInputs.cache
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\obj\Debug\netcoreapp3.1\sportsclub_management.models.dll
+D:\YUDIZ\Trainee\A\Api_SportsClub\Code\Api_SportsClub.api\Api_SportsClub.models\obj\Debug\netcoreapp3.1\sportsclub_management.models.pdb

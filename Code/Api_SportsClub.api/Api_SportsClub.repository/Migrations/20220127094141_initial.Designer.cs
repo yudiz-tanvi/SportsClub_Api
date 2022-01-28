@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api_SportsClub.repository.Migrations
 {
-    [DbContext(typeof(ApiSportsClubContext))]
+    [DbContext(typeof(SportsClubManagementContext))]
     [Migration("20220127094141_initial")]
     partial class initial
     {

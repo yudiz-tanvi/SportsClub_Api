@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj": {}
+    "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj": {}
   },
   "projects": {
-    "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj": {
+    "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj",
+        "projectUniqueName": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj",
         "projectName": "Api_SportsClub.models",
-        "projectPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj",
+        "projectPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.models\\obj\\",
+        "outputPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

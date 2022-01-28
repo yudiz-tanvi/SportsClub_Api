@@ -1496,30 +1496,30 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Api_SportsClub.models/1.0.0": {
+      "sportsclub_management.models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "compile": {
-          "bin/placeholder/Api_SportsClub.models.dll": {}
+          "bin/placeholder/sportsclub_management.models.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Api_SportsClub.models.dll": {}
+          "bin/placeholder/sportsclub_management.models.dll": {}
         }
       },
-      "Api_SportsClub.repository/1.0.0": {
+      "sportsclub_management.repository/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Api_SportsClub.models": "1.0.0",
           "Microsoft.EntityFrameworkCore": "3.1.22",
           "Microsoft.EntityFrameworkCore.Relational": "3.1.22",
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.22"
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.22",
+          "sportsclub_management.models": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Api_SportsClub.repository.dll": {}
+          "bin/placeholder/sportsclub_management.repository.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Api_SportsClub.repository.dll": {}
+          "bin/placeholder/sportsclub_management.repository.dll": {}
         }
       }
     }
@@ -5685,24 +5685,24 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Api_SportsClub.models/1.0.0": {
+    "sportsclub_management.models/1.0.0": {
       "type": "project",
-      "path": "../Api_SportsClub.models/Api_SportsClub.models.csproj",
-      "msbuildProject": "../Api_SportsClub.models/Api_SportsClub.models.csproj"
+      "path": "../Api_SportsClub.models/sportsclub_management.models.csproj",
+      "msbuildProject": "../Api_SportsClub.models/sportsclub_management.models.csproj"
     },
-    "Api_SportsClub.repository/1.0.0": {
+    "sportsclub_management.repository/1.0.0": {
       "type": "project",
-      "path": "../Api_SportsClub.repository/Api_SportsClub.repository.csproj",
-      "msbuildProject": "../Api_SportsClub.repository/Api_SportsClub.repository.csproj"
+      "path": "../Api_SportsClub.repository/sportsclub_management.repository.csproj",
+      "msbuildProject": "../Api_SportsClub.repository/sportsclub_management.repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Api_SportsClub.models >= 1.0.0",
-      "Api_SportsClub.repository >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 3.1.22",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.22",
-      "Microsoft.EntityFrameworkCore.Tools >= 3.1.22"
+      "Microsoft.EntityFrameworkCore.Tools >= 3.1.22",
+      "sportsclub_management.models >= 1.0.0",
+      "sportsclub_management.repository >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5712,11 +5712,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.api\\Api_SportsClub.api.csproj",
-      "projectName": "Api_SportsClub.api",
-      "projectPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.api\\Api_SportsClub.api.csproj",
+      "projectUniqueName": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.api\\sportsclub_management.api.csproj",
+      "projectName": "sportsclub_management.api",
+      "projectPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.api\\sportsclub_management.api.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.api\\obj\\",
+      "outputPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5736,11 +5736,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj": {
-              "projectPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.models\\Api_SportsClub.models.csproj"
+            "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.models\\sportsclub_management.models.csproj": {
+              "projectPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.models\\sportsclub_management.models.csproj"
             },
-            "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.repository\\Api_SportsClub.repository.csproj": {
-              "projectPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.repository\\Api_SportsClub.repository.csproj"
+            "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.repository\\sportsclub_management.repository.csproj": {
+              "projectPath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.repository\\sportsclub_management.repository.csproj"
             }
           }
         }

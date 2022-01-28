@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Api_SportsClub.repository
 {
-	public class ApiSportsClubContext : DbContext
+	public class SportsClubManagementContext : DbContext
 	{
-		public ApiSportsClubContext(DbContextOptions<ApiSportsClubContext> options) : base(options)
+		public SportsClubManagementContext(DbContextOptions<SportsClubManagementContext> options) : base(options)
 		{
 
 		}

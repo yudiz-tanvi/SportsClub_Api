@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api_SportsClub.repository.Migrations
 {
-    [DbContext(typeof(ApiSportsClubContext))]
+    [DbContext(typeof(SportsClubManagementContext))]
     partial class ApiSportsClubContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

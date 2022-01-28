@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VfXtWXj4JVY1dqIsFrOlmlApxb46mmnUaOq4Kq3v0m4hQm3BAR2fjNvlErYpVxD5du5xviE259gHMr2hrjWypA==",
+  "dgSpecHash": "yIU4ZyWAc753Ne+DQz+KB/5dpbl6/Wh7ycgNho13cRGuyVUYcqP6KuWrdbs/zWE2yvatPc0S1hF4PueYHG18Mw==",
   "success": true,
-  "projectFilePath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub.api\\Api_SportsClub.api\\Api_SportsClub.api.csproj",
+  "projectFilePath": "D:\\YUDIZ\\Trainee\\A\\Api_SportsClub\\Code\\Api_SportsClub.api\\Api_SportsClub.api\\sportsclub_management.api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",

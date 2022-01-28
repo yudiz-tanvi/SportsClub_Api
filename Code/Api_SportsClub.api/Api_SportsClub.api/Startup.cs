@@ -26,7 +26,7 @@ namespace Api_SportsClub.api
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<ApiSportsClubContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+			services.AddDbContext<SportsClubManagementContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 			
 			services.AddControllers();
 		}
