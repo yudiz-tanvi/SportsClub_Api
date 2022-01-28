@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api_SportsClub.models\sportsclub_management.models.csproj" />
-    <ProjectReference Include="..\Api_SportsClub.repository\sportsclub_management.repository.csproj" />
+    <ProjectReference Include="..\sportsclub_management.models\sportsclub_management.models.csproj" />
+    <ProjectReference Include="..\sportsclub_management.repository\sportsclub_management.repository.csproj" />
   </ItemGroup>
 
 

@@ -1,4 +1,4 @@
-using Api_SportsClub.repository;
+using sportsclub_management.repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api_SportsClub.api
+namespace sportsclub_management.api
 {
 	public class Startup
 	{

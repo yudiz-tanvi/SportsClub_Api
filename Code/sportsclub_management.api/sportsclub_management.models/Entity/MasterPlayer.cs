@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Api_SportsClub.models
+namespace sportsclub_management.models
 {
 	public class MasterPlayer : BaseEntity
 	{

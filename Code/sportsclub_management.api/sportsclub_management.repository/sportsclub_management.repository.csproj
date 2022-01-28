@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api_SportsClub.models\sportsclub_management.models.csproj" />
+    <ProjectReference Include="..\sportsclub_management.models\sportsclub_management.models.csproj" />
   </ItemGroup>
 
 </Project>

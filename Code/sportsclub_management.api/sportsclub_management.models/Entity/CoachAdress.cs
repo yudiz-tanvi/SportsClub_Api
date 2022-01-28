@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Api_SportsClub.models
+namespace sportsclub_management.models
 {
 	public class CoachAdress : BaseEntity
 	{

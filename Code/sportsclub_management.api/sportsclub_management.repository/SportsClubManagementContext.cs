@@ -1,10 +1,10 @@
-﻿using Api_SportsClub.models;
+﻿using sportsclub_management.models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api_SportsClub.repository
+namespace sportsclub_management.repository
 {
 	public class SportsClubManagementContext : DbContext
 	{
