@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace sportsclub_management.models
@@ -28,7 +29,11 @@ namespace sportsclub_management.models
 			get; set;
 		}
 
+		[ForeignKey("MasterGame")]
+		public Guid MasterGameId { get; set; }
+		public MasterGame MasterGame { get; set; }
 
+		public ICollection<CoachAdress> CoachAddress { get; set; }
 
 	}
 }

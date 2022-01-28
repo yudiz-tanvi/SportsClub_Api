@@ -10,5 +10,13 @@ namespace sportsclub_management.models
 		[Required]
 		[MaxLength(50)]
 		public string Name { get; set; }
+
+		public ICollection<MasterCoach> MasterCoach { get; set; }
+
+		public ICollection<GameEquipmentMap> GameEquipmentMap { get; set; }
+
+		public ICollection<PlayerGameMap> PlayerGameMap { get; set; }
+
+		public ICollection<Feedback> Feedback { get; set; }
 	}
 }

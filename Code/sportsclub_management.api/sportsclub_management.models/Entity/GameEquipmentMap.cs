@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace sportsclub_management.models
@@ -14,5 +15,14 @@ namespace sportsclub_management.models
 		[Required]
 		[MaxLength(250)]
 		public string Remarks { get; set; }
+
+		[ForeignKey("MasterGame")]
+		public Guid MasterGameId { get; set; }
+		public MasterGame MasterGame { get; set; }
+
+		[ForeignKey("MasterEquipment")]
+		public Guid MasterEquipmentId { get; set; }
+		public MasterEquipment MasterEquipment { get; set; }
+
 	}
 }

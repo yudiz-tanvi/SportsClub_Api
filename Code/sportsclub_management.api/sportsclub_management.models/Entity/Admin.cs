@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace sportsclub_management.models
@@ -30,5 +31,9 @@ namespace sportsclub_management.models
 		[Required]
 		[MaxLength(10)]
 		public string Gender { get; set; }
+
+		[ForeignKey("MasterRole")]
+		public Guid MasterRoleId { get; set; }
+		public MasterRole MasterRole { get; set; }
 	}
 }

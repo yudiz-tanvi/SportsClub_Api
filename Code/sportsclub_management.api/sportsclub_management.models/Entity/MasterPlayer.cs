@@ -48,5 +48,9 @@ namespace sportsclub_management.models
 		{
 			get; set;
 		}
+
+		public ICollection<PlayerGameMap> PlayerGameMap { get; set; }
+
+		public ICollection<Feedback> Feedback { get; set; }
 	}
 }

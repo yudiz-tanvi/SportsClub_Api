@@ -13,5 +13,7 @@ namespace sportsclub_management.models
 
 		[Required]
 		public int Quantity { get; set; }
+
+		public ICollection<GameEquipmentMap> GameEquipmentMap { get; set; }
 	}
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sportsclub_management.repository;
 
 namespace Api_SportsClub.repository.Migrations
 {
     [DbContext(typeof(SportsClubManagementContext))]
-    partial class ApiSportsClubContextModelSnapshot : ModelSnapshot
+    [Migration("20220128073545_Foreign Key")]
+    partial class ForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

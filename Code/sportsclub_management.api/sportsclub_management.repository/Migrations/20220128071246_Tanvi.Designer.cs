@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sportsclub_management.repository;
 
 namespace Api_SportsClub.repository.Migrations
 {
     [DbContext(typeof(SportsClubManagementContext))]
-    partial class ApiSportsClubContextModelSnapshot : ModelSnapshot
+    [Migration("20220128071246_Tanvi")]
+    partial class Tanvi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,9 +46,6 @@ namespace Api_SportsClub.repository.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<Guid>("MasterRoleId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Mobile")
                         .HasColumnType("int")
                         .HasMaxLength(10);
@@ -71,8 +70,6 @@ namespace Api_SportsClub.repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MasterRoleId");
-
                     b.ToTable("Admin");
                 });
 
@@ -96,15 +93,10 @@ namespace Api_SportsClub.repository.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MasterCoachId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MasterCoachId");
 
                     b.ToTable("CoachAddress");
                 });
@@ -129,20 +121,10 @@ namespace Api_SportsClub.repository.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MasterGameId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MasterPlayerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MasterGameId");
-
-                    b.HasIndex("MasterPlayerId");
 
                     b.ToTable("Feedback");
                 });
@@ -162,12 +144,6 @@ namespace Api_SportsClub.repository.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MasterEquipmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MasterGameId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
 
@@ -182,10 +158,6 @@ namespace Api_SportsClub.repository.Migrations
                         .HasMaxLength(250);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MasterEquipmentId");
-
-                    b.HasIndex("MasterGameId");
 
                     b.ToTable("GameEquipmentMap");
                 });
@@ -387,70 +359,12 @@ namespace Api_SportsClub.repository.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MasterGameId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MasterPlayerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MasterGameId");
-
-                    b.HasIndex("MasterPlayerId");
-
                     b.ToTable("PlayerGameMap");
-                });
-
-            modelBuilder.Entity("sportsclub_management.models.Admin", b =>
-                {
-                    b.HasOne("sportsclub_management.models.MasterRole", "MasterRole")
-                        .WithMany("Admin")
-                        .HasForeignKey("MasterRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("sportsclub_management.models.CoachAdress", b =>
-                {
-                    b.HasOne("sportsclub_management.models.MasterCoach", "MasterCoach")
-                        .WithMany("CoachAddress")
-                        .HasForeignKey("MasterCoachId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("sportsclub_management.models.Feedback", b =>
-                {
-                    b.HasOne("sportsclub_management.models.MasterGame", "MasterGame")
-                        .WithMany("Feedback")
-                        .HasForeignKey("MasterGameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("sportsclub_management.models.MasterPlayer", "MasterPlayer")
-                        .WithMany("Feedback")
-                        .HasForeignKey("MasterPlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("sportsclub_management.models.GameEquipmentMap", b =>
-                {
-                    b.HasOne("sportsclub_management.models.MasterEquipment", "MasterEquipment")
-                        .WithMany("GameEquipmentMap")
-                        .HasForeignKey("MasterEquipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("sportsclub_management.models.MasterGame", "MasterGame")
-                        .WithMany("GameEquipmentMap")
-                        .HasForeignKey("MasterGameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("sportsclub_management.models.MasterCoach", b =>
@@ -458,21 +372,6 @@ namespace Api_SportsClub.repository.Migrations
                     b.HasOne("sportsclub_management.models.MasterGame", "MasterGame")
                         .WithMany("MasterCoach")
                         .HasForeignKey("MasterGameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("sportsclub_management.models.PlayerGameMap", b =>
-                {
-                    b.HasOne("sportsclub_management.models.MasterGame", "MasterGame")
-                        .WithMany("PlayerGameMap")
-                        .HasForeignKey("MasterGameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("sportsclub_management.models.MasterPlayer", "MasterPlayer")
-                        .WithMany("PlayerGameMap")
-                        .HasForeignKey("MasterPlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
