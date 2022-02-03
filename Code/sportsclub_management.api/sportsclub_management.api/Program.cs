@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api_SportsClub.api
+namespace sportsclub_management.api
 {
 	public class Program
 	{

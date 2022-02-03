@@ -15,7 +15,7 @@ namespace sportsclub_management.repository
 
 		public new DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity => base.Set<TEntity>();
 
-		public DbSet<MasterGame> MasterGames { get; set; }
+		public DbSet<MasterGame> MasterGame { get; set; }
 		public DbSet<MasterPlayer> MasterPlayer { get; set; }
 		public DbSet<MasterCoach> MasterCoach { get; set; }
 		public DbSet<MasterEquipment> MasterEquipment { get; set; }
@@ -24,6 +24,6 @@ namespace sportsclub_management.repository
 		public DbSet<GameEquipmentMap> GameEquipmentMap { get; set; }
 		public DbSet<Admin> Admin { get; set; }
 		public DbSet<Feedback> Feedback { get; set; }
-		public DbSet<CoachAdress> CoachAddress { get; set; }
+		public DbSet<CoachAddress> CoachAddress { get; set; }
 	}
 }

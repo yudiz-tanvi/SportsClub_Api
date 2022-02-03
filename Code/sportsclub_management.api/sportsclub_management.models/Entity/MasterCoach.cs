@@ -17,7 +17,7 @@ namespace sportsclub_management.models
 
 		[Required]
 		[MaxLength(10)]
-		public int Mobile
+		public long Mobile
 		{
 			get; set;
 		}
@@ -33,7 +33,7 @@ namespace sportsclub_management.models
 		public Guid MasterGameId { get; set; }
 		public MasterGame MasterGame { get; set; }
 
-		public ICollection<CoachAdress> CoachAddress { get; set; }
+		public ICollection<CoachAddress> CoachAddress { get; set; }
 
 	}
 }

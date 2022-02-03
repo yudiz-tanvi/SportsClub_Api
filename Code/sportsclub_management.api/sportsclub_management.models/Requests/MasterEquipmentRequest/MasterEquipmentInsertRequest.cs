@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace sportsclub_management.models
+namespace sportsclub_management.models.Requests.MasterEquipmentRequest
 {
-	public class MasterEquipment : BaseEntity
+	public class MasterEquipmentInsertRequest
 	{
 		[Required]
-		[MaxLength(50)]
 		public string Name { get; set; }
 
 		[Required]
 		public long Quantity { get; set; }
-
-		public ICollection<GameEquipmentMap> GameEquipmentMap { get; set; }
 	}
 }

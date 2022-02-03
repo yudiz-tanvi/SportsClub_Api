@@ -6,11 +6,11 @@ using System.Text;
 
 namespace sportsclub_management.models
 {
-	public class CoachAdress : BaseEntity
+	public class CoachAddress : BaseEntity
 	{
 		[Required]
 		[MaxLength(500)]
-		public string Coach_Adress { get; set; }
+		public string Coach_Address { get; set; }
 
 		[ForeignKey("MasterCoach")]
 		public Guid MasterCoachId { get; set; }

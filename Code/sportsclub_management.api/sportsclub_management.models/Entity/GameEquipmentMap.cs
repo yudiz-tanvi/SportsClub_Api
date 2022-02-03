@@ -10,7 +10,7 @@ namespace sportsclub_management.models
 	{
 		[Required]
 		[MaxLength(100)]
-		public string Quantity { get; set; }
+		public long Quantity { get; set; }
 
 		[Required]
 		[MaxLength(250)]

@@ -10,6 +10,7 @@ namespace sportsclub_management.models
 	{
 		[Required]
 		[MaxLength(50)]
+		
 		public string Name
 		{
 			get; set;
@@ -17,7 +18,7 @@ namespace sportsclub_management.models
 
 		[Required]
 		[MaxLength(10)]
-		public int Mobile
+		public long Mobile
 		{
 			get; set;
 		}
