@@ -32,8 +32,9 @@ namespace sportsclub_management.models
 		[MaxLength(10)]
 		public string Gender { get; set; }
 
-		[ForeignKey("MasterRole")]
+		[Required]
 		public Guid MasterRoleId { get; set; }
+		[ForeignKey("MasterRoleId")]
 		public MasterRole MasterRole { get; set; }
 	}
 }

@@ -10,10 +10,11 @@ namespace sportsclub_management.models
 	{
 		[Required]
 		[MaxLength(500)]
-		public string Coach_Address { get; set; }
+		public string Address { get; set; }
 
-		[ForeignKey("MasterCoach")]
+		[Required]
 		public Guid MasterCoachId { get; set; }
+		[ForeignKey("MasterCoachId")]
 		public MasterCoach MasterCoach { get; set; }
 	}
 }

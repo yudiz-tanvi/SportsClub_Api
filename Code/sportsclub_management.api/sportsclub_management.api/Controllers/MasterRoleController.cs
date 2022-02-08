@@ -25,7 +25,7 @@ namespace sportsclub_management.api.Controllers
         {
             if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
 
-            var response = DbContext.MasterGame
+            var response = DbContext.MasterRole
                             //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
                             .Skip(request.PageNo * request.PageSize) // Skip records     
                             .Take(request.PageSize); // How many records select in page
@@ -40,7 +40,7 @@ namespace sportsclub_management.api.Controllers
             if (!ModelState.IsValid)
                 return ErrorResponse(ModelState);
 
-            var response = DbContext.MasterGame.FirstOrDefault(x => x.Id.Equals(request.Id));
+            var response = DbContext.MasterRole.FirstOrDefault(x => x.Id.Equals(request.Id));
 
             return OkResponse(response);
         }
@@ -48,7 +48,7 @@ namespace sportsclub_management.api.Controllers
         [HttpPost(ActionConts.MasterRoleSelectForDropdown)]
         public IActionResult MasterRoleSelectForDropdown()
         {
-            var response = DbContext.MasterGame.Select(x => new { x.Name, x.Id });
+            var response = DbContext.MasterRole.Select(x => new { x.Name, x.Id });
 
             return OkResponse(response);
         }

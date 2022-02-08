@@ -39,7 +39,7 @@ namespace sportsclub_management.api.Controllers
             if (!ModelState.IsValid)
                 return ErrorResponse(ModelState);
 
-            var response = DbContext.MasterGame.FirstOrDefault(x => x.Id.Equals(request.Id));
+            var response = DbContext.MasterCoach.FirstOrDefault(x => x.Id.Equals(request.Id));
 
             return OkResponse(response);
         }
@@ -63,6 +63,7 @@ namespace sportsclub_management.api.Controllers
                 Name = request.Name,
                 Mobile = request.Mobile,
                 AadharNumber = request.AadharNumber,
+                MasterGameId = request.MasterGameId,
 
             });
             DbContext.SaveChanges();

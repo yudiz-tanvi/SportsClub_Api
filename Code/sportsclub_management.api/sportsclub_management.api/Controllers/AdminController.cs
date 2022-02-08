@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using sportsclub_management.api.Controllers.Base;
 using sportsclub_management.models;
 using sportsclub_management.models.Constants;
+using sportsclub_management.models.Requests.Admin;
 using sportsclub_management.models.Requests.Base;
 using sportsclub_management.repository;
 using System;
@@ -10,16 +12,10 @@ using System.Threading.Tasks;
 
 namespace sportsclub_management.api.Controllers
 {
-	[Route("api/v1/")]
-	[ApiController]
-
-	public class AdminController : ControllerBase
+	public class AdminController : BaseController
 	{
-        SportsClubManagementContext DbContext { get; set; }
-
-        public AdminController(SportsClubManagementContext DbContext)  //TODO: Explain Depedency Injection
+        public AdminController(SportsClubManagementContext DbContext) : base(DbContext)  //TODO: Explain Depedency Injection
         {
-            this.DbContext = DbContext;
         }
 
         //IRepository<ApiDemoContext, CountryEntity> CountryRepository;
@@ -29,37 +25,53 @@ namespace sportsclub_management.api.Controllers
         {
             if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
 
-            var response = DbContext.Admin.ToList();
+            var response = DbContext.Admin
+                            //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
+                            .Skip(request.PageNo * request.PageSize) // Skip records     
+                            .Take(request.PageSize); // How many records select in page
 
-            return Ok(response);
+
+            return OkResponse(response);
         }
 
         [HttpPost(ActionConts.AdminSelectById)]
-        public IActionResult AdminSelectById([FromBody] BaseIdRequest request)
+        public IActionResult AdminSelectById([FromBody] BaseRequiredIdRequest request)
         {
+            if (!ModelState.IsValid)
+                return ErrorResponse(ModelState);
+
             var response = DbContext.Admin.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-            return Ok(response);
+            return OkResponse(response);
         }
 
         [HttpPost(ActionConts.AdminSelectForDropdown)]
-        public IActionResult AdminSelectForDropdown([FromBody] BaseIdRequest request)
+        public IActionResult AdminSelectForDropdown()
         {
-            var response = DbContext.Admin.FirstOrDefault(x => x.Id.Equals(request.Id));
+            var response = DbContext.Admin.Select(x => new { x.Name, x.Id });
 
-            return Ok(response);
+            return OkResponse(response);
         }
 
         [HttpPost(ActionConts.AdminInsert)]
-        public async Task<IActionResult> AdminInsert([FromBody] BaseIdRequest request)
+        public async Task<IActionResult> AdminInsert([FromBody] AdminInsertRequest request)
         {
+            if (!ModelState.IsValid)
+                return ErrorResponse(ModelState);
+
             await DbContext.Admin.AddAsync(new Admin
             {
-                Name = "Tanvi",
+                Name = request.Name,
+                Email = request.Email,
+                Password = request.Password,
+                Username = request.Username,
+                Mobile = request.Mobile,
+                Gender = request.Gender,
+                MasterRoleId = request.MasterRoleId,
             });
             DbContext.SaveChanges();
 
-            return Ok();
+            return OkResponse();
         }
 
         [HttpPost(ActionConts.AdminDelete)]
@@ -70,7 +82,7 @@ namespace sportsclub_management.api.Controllers
             DbContext.Admin.Remove(Admin);
             DbContext.SaveChanges();
 
-            return Ok();
+            return OkResponse();
         }
     }
 }

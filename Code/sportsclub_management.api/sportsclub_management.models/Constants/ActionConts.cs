@@ -9,154 +9,154 @@ namespace sportsclub_management.models.Constants
         public const string ApiVersion = "api/v1";
 
         //Admin
-        public const string AdminSelectList = "Admin/select_list";
+        public const string AdminSelectList = "admin/select_list";
 
-        public const string AdminSelectById = "Admin/select_by_id";
+        public const string AdminSelectById = "admin/select_by_id";
 
-        public const string AdminSelectForDropdown = "Admin/select_for_dropdown";
+        public const string AdminSelectForDropdown = "admin/select_for_dropdown";
 
-        public const string AdminInsert = "Admin/insert";
+        public const string AdminInsert = "admin/insert";
 
-        public const string AdminUpdate = "Admin/update";
+        public const string AdminUpdate = "admin/update";
 
-        public const string AdminUpdateStatus = "Admin/update_status";
+        public const string AdminUpdateStatus = "admin/update_status";
 
-        public const string AdminDelete = "Admin/delete";
+        public const string AdminDelete = "admin/delete";
 
         //CoachAddress
-        public const string CoachAddressSelectList = "CoachAddress/select_list";
+        public const string CoachAddressSelectList = "coachaddress/select_list";
 
-        public const string CoachAddressSelectById = "CoachAddress/select_by_id";
+        public const string CoachAddressSelectById = "coachaddress/select_by_id";
 
-        public const string CoachAddressSelectForDropdown = "CoachAddress/select_for_dropdown";
+        public const string CoachAddressSelectForDropdown = "coachaddress/select_for_dropdown";
 
-        public const string CoachAddressInsert = "CoachAddress/insert";
+        public const string CoachAddressInsert = "coachaddress/insert";
 
-        public const string CoachAddressUpdate = "CoachAddress/update";
+        public const string CoachAddressUpdate = "coachaddress/update";
 
-        public const string CoachAddressUpdateStatus = "CoachAddress/update_status";
+        public const string CoachAddressUpdateStatus = "coachaddress/update_status";
 
-        public const string CoachAddressDelete = "CoachAddress/delete";
+        public const string CoachAddressDelete = "coachaddress/delete";
 
         //Feedback
-        public const string FeedbackSelectList = "Feedback/select_list";
+        public const string FeedbackSelectList = "feedback/select_list";
 
-        public const string FeedbackSelectById = "Feedback/select_by_id";
+        public const string FeedbackSelectById = "feedback/select_by_id";
 
-        public const string FeedbackSelectForDropdown = "Feedback/select_for_dropdown";
+        public const string FeedbackSelectForDropdown = "feedback/select_for_dropdown";
 
-        public const string FeedbackInsert = "Feedback/insert";
+        public const string FeedbackInsert = "feedback/insert";
 
-        public const string FeedbackUpdate = "Feedback/update";
+        public const string FeedbackUpdate = "feedback/update";
 
-        public const string FeedbackUpdateStatus = "Feedback/update_status";
+        public const string FeedbackUpdateStatus = "feedback/update_status";
 
-        public const string FeedbackDelete = "Feedback/delete";
+        public const string FeedbackDelete = "feedback/delete";
 
         //GameEquipmentMap
-        public const string GameEquipmentMapSelectList = "GameEquipmentMap/select_list";
+        public const string GameEquipmentMapSelectList = "gameequipmentmap/select_list";
 
-        public const string GameEquipmentMapSelectById = "GameEquipmentMap/select_by_id";
+        public const string GameEquipmentMapSelectById = "gameequipmentmap/select_by_id";
 
-        public const string GameEquipmentMapSelectForDropdown = "GameEquipmentMap/select_for_dropdown";
+        public const string GameEquipmentMapSelectForDropdown = "gameequipmentmap/select_for_dropdown";
 
-        public const string GameEquipmentMapInsert = "GameEquipmentMap/insert";
+        public const string GameEquipmentMapInsert = "gameequipmentmap/insert";
 
-        public const string GameEquipmentMapMapUpdate = "GameEquipmentMap/update";
+        public const string GameEquipmentMapMapUpdate = "gameequipmentmap/update";
 
-        public const string GameEquipmentMapUpdateStatus = "GameEquipmentMap/update_status";
+        public const string GameEquipmentMapUpdateStatus = "gameequipmentmap/update_status";
 
-        public const string GameEquipmentMapDelete = "GameEquipmentMap/delete";
+        public const string GameEquipmentMapDelete = "gameequipmentmap/delete";
 
         //MasterCoach
-        public const string MasterCoachSelectList = "MasterCoach/select_list";
+        public const string MasterCoachSelectList = "mastercoach/select_list";
 
-        public const string MasterCoachSelectById = "MasterCoach/select_by_id";
+        public const string MasterCoachSelectById = "mastercoach/select_by_id";
 
-        public const string MasterCoachSelectForDropdown = "MasterCoach/select_for_dropdown";
+        public const string MasterCoachSelectForDropdown = "mastercoach/select_for_dropdown";
 
-        public const string MasterCoachInsert = "MasterCoach/insert";
+        public const string MasterCoachInsert = "mastercoach/insert";
 
-        public const string MasterCoachUpdate = "MasterCoach/update";
+        public const string MasterCoachUpdate = "mastercoach/update";
 
-        public const string MasterCoachUpdateStatus = "MasterCoach/update_status";
+        public const string MasterCoachUpdateStatus = "mastercoach/update_status";
 
-        public const string MasterCoachDelete = "MasterCoach/delete";
+        public const string MasterCoachDelete = "mastercoach/delete";
 
         //MasterEquipment
-        public const string MasterEquipmentSelectList = "MasterEquipment/select_list";
+        public const string MasterEquipmentSelectList = "masterequipment/select_list";
 
-        public const string MasterEquipmentSelectById = "MasterEquipment/select_by_id";
+        public const string MasterEquipmentSelectById = "masterequipment/select_by_id";
 
-        public const string MasterEquipmentSelectForDropdown = "MasterEquipment/select_for_dropdown";
+        public const string MasterEquipmentSelectForDropdown = "masterequipment/select_for_dropdown";
 
-        public const string MasterEquipmentInsert = "MasterEquipment/insert";
+        public const string MasterEquipmentInsert = "masterequipment/insert";
 
-        public const string MasterEquipmentUpdate = "MasterEquipment/update";
+        public const string MasterEquipmentUpdate = "masterequipment/update";
 
-        public const string MasterEquipmentUpdateStatus = "MasterEquipment/update_status";
+        public const string MasterEquipmentUpdateStatus = "masterequipment/update_status";
 
-        public const string MasterEquipmentDelete = "MasterEquipment/delete";
+        public const string MasterEquipmentDelete = "masterequipment/delete";
 
         //MasterGame
-        public const string MasterGameSelectList = "MasterGame/select_list";
+        public const string MasterGameSelectList = "mastergame/select_list";
 
-        public const string MasterGameSelectById = "MasterGame/select_by_id";
+        public const string MasterGameSelectById = "mastergame/select_by_id";
 
-        public const string MasterGameSelectForDropdown = "MasterGame/select_for_dropdown";
+        public const string MasterGameSelectForDropdown = "mastergame/select_for_dropdown";
 
-        public const string MasterGameInsert = "MasterGame/insert";
+        public const string MasterGameInsert = "mastergame/insert";
 
-        public const string MasterGameUpdate = "MasterGame/update";
+        public const string MasterGameUpdate = "mastergame/update";
 
-        public const string MasterGameUpdateStatus = "MasterGame/update_status";
+        public const string MasterGameUpdateStatus = "mastergame/update_status";
 
-        public const string MasterGameDelete = "MasterGame/delete";
+        public const string MasterGameDelete = "mastergame/delete";
 
         //MasterPlayer
-        public const string MasterPlayerSelectList = "MasterPlayer/select_list";
+        public const string MasterPlayerSelectList = "masterplayer/select_list";
 
-        public const string MasterPlayerSelectById = "MasterPlayer/select_by_id";
+        public const string MasterPlayerSelectById = "masterplayer/select_by_id";
                                   
-        public const string MasterPlayerSelectForDropdown = "MasterPlayer/select_for_dropdown";
+        public const string MasterPlayerSelectForDropdown = "masterplayer/select_for_dropdown";
                                   
-        public const string MasterPlayerInsert = "MasterPlayer/insert";
+        public const string MasterPlayerInsert = "masterplayer/insert";
                                   
-        public const string MasterPlayerUpdate = "MasterPlayer/update";
+        public const string MasterPlayerUpdate = "masterplayer/update";
                                   
-        public const string MasterPlayerUpdateStatus = "MasterPlayer/update_status";
+        public const string MasterPlayerUpdateStatus = "masterplayer/update_status";
 
-        public const string MasterPlayerDelete = "MasterPlayer/delete";
+        public const string MasterPlayerDelete = "masterplayer/delete";
 
         //MasterRole
-        public const string MasterRoleSelectList = "MasterRole/select_list";
+        public const string MasterRoleSelectList = "masterrole/select_list";
 
-        public const string MasterRoleSelectById = "MasterRole/select_by_id";
+        public const string MasterRoleSelectById = "masterrole/select_by_id";
 
-        public const string MasterRoleSelectForDropdown = "MasterRole/select_for_dropdown";
+        public const string MasterRoleSelectForDropdown = "masterrole/select_for_dropdown";
 
-        public const string MasterRoleInsert = "MasterRole/insert";
+        public const string MasterRoleInsert = "masterrole/insert";
 
-        public const string MasterRoleUpdate = "MasterRole/update";
+        public const string MasterRoleUpdate = "masterrole/update";
 
-        public const string MasterRoleUpdateStatus = "MasterRole/update_status";
+        public const string MasterRoleUpdateStatus = "masterrole/update_status";
 
-        public const string MasterRoleDelete = "MasterRole/delete";
+        public const string MasterRoleDelete = "masterrole/delete";
 
         //PlayerGameMap
-        public const string PlayerGameMapSelectList = "PlayerGameMap/select_list";
+        public const string PlayerGameMapSelectList = "playergamemap/select_list";
 
-        public const string PlayerGameMapSelectById = "PlayerGameMap/select_by_id";
+        public const string PlayerGameMapSelectById = "playergamemap/select_by_id";
 
-        public const string PlayerGameMapSelectForDropdown = "PlayerGameMap/select_for_dropdown";
+        public const string PlayerGameMapSelectForDropdown = "playergamemap/select_for_dropdown";
 
-        public const string PlayerGameMapInsert = "PlayerGameMap/insert";
+        public const string PlayerGameMapInsert = "playergamemap/insert";
 
-        public const string PlayerGameMapUpdate = "PlayerGameMap/update";
+        public const string PlayerGameMapUpdate = "playergamemap/update";
 
-        public const string PlayerGameMapUpdateStatus = "PlayerGameMap/update_status";
+        public const string PlayerGameMapUpdateStatus = "playergamemap/update_status";
 
-        public const string PlayerGameMapDelete = "PlayerGameMap/delete";
+        public const string PlayerGameMapDelete = "playergamemap/delete";
 
 
     }

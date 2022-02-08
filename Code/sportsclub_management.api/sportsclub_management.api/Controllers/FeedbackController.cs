@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using sportsclub_management.api.Controllers.Base;
 using sportsclub_management.models;
 using sportsclub_management.models.Constants;
 using sportsclub_management.models.Requests.Base;
+using sportsclub_management.models.Requests.Feedback;
 using sportsclub_management.repository;
 using System;
 using System.Collections.Generic;
@@ -10,16 +12,10 @@ using System.Threading.Tasks;
 
 namespace sportsclub_management.api.Controllers
 {
-	[Route("api/v1/")]
-	[ApiController]
-
-	public class FeedbackController : ControllerBase
+	public class FeedbackController : BaseController
 	{
-        SportsClubManagementContext DbContext { get; set; }
-
-        public FeedbackController(SportsClubManagementContext DbContext)  //TODO: Explain Depedency Injection
+        public FeedbackController(SportsClubManagementContext DbContext) : base(DbContext)  //TODO: Explain Depedency Injection
         {
-            this.DbContext = DbContext;
         }
 
         //IRepository<ApiDemoContext, CountryEntity> CountryRepository;
@@ -29,38 +25,49 @@ namespace sportsclub_management.api.Controllers
         {
             if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
 
-            var response = DbContext.Feedback.ToList();
+            var response = DbContext.Feedback
+                            //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
+                            .Skip(request.PageNo * request.PageSize) // Skip records     
+                            .Take(request.PageSize); // How many records select in page
 
-            return Ok(response);
+
+            return OkResponse(response);
         }
 
         [HttpPost(ActionConts.FeedbackSelectById)]
-        public IActionResult FeedbackSelectById([FromBody] BaseIdRequest request)
+        public IActionResult FeedbackSelectById([FromBody] BaseRequiredIdRequest request)
         {
+            if (!ModelState.IsValid)
+                return ErrorResponse(ModelState);
+
             var response = DbContext.Feedback.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-            return Ok(response);
+            return OkResponse(response);
         }
 
-        [HttpPost(ActionConts.FeedbackSelectForDropdown)]
-        public IActionResult FeedbackSelectForDropdown([FromBody] BaseIdRequest request)
-        {
-            var response = DbContext.Feedback.FirstOrDefault(x => x.Id.Equals(request.Id));
-
-            return Ok(response);
-        }
+        //[HttpPost(ActionConts.FeedbackSelectForDropdown)]
+        //public IActionResult FeedbackSelectForDropdown()
+        //{
+        //    var response = DbContext.Feedback.Select(x => new { x.Name, x.Id });
+        //
+        //    return OkResponse(response);
+        //}
 
         [HttpPost(ActionConts.FeedbackInsert)]
-        public async Task<IActionResult> FeedbackInsert([FromBody] BaseIdRequest request)
+        public async Task<IActionResult> FeedbackInsert([FromBody] FeedbackInsertRequest request)
         {
+            if (!ModelState.IsValid)
+                return ErrorResponse(ModelState);
+
             await DbContext.Feedback.AddAsync(new Feedback
             {
-                Add_Feedback = "Good",
-                
+                Add_Feedback = request.Add_Feedback,
+                MasterPlayerId = request.MasterPlayerId,
+                MasterGameId = request.MasterGameId,
             });
             DbContext.SaveChanges();
 
-            return Ok();
+            return OkResponse();
         }
 
         [HttpPost(ActionConts.FeedbackDelete)]
@@ -71,7 +78,7 @@ namespace sportsclub_management.api.Controllers
             DbContext.Feedback.Remove(Feedback);
             DbContext.SaveChanges();
 
-            return Ok();
+            return OkResponse();
         }
     }
 }

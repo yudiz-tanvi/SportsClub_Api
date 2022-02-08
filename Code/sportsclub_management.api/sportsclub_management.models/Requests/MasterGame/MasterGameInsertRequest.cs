@@ -8,6 +8,7 @@ namespace sportsclub_management.models.Requests.MasterGame
 	public class MasterGameInsertRequest
 	{
 		[Required]
+		
 		public string Name { get; set; }
 	}
 }

@@ -12,12 +12,14 @@ namespace sportsclub_management.models
 		[MaxLength(500)]
 		public string Add_Feedback { get; set; }
 
-		[ForeignKey("MaasterPlayer")]
+		[Required]
 		public Guid MasterPlayerId { get; set; }
+		[ForeignKey("MaasterPlayerId")]
 		public MasterPlayer MasterPlayer { get; set; }
 
-		[ForeignKey("MasterGame")]
+		[Required]
 		public Guid MasterGameId { get; set; }
+		[ForeignKey("MasterGameId")]
 		public MasterGame MasterGame { get; set; }
 	}
 }

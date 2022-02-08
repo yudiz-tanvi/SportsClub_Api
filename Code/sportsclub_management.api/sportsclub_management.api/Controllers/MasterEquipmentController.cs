@@ -3,7 +3,7 @@ using sportsclub_management.api.Controllers.Base;
 using sportsclub_management.models;
 using sportsclub_management.models.Constants;
 using sportsclub_management.models.Requests.Base;
-using sportsclub_management.models.Requests.MasterEquipmentRequest;
+using sportsclub_management.models.Requests.MasterEquipment;
 using sportsclub_management.repository;
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace sportsclub_management.api.Controllers
             if (!ModelState.IsValid)
                 return ErrorResponse(ModelState);
 
-            var response = DbContext.MasterGame.FirstOrDefault(x => x.Id.Equals(request.Id));
+            var response = DbContext.MasterEquipment.FirstOrDefault(x => x.Id.Equals(request.Id));
 
             return OkResponse(response);
         }

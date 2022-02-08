@@ -8,6 +8,9 @@ namespace sportsclub_management.models.Requests.CoachAddress
 	public class CoachAddressInsertRequest
 	{
 		[Required]
-		public string Coach_Address { get; set; }
+		public string Address { get; set; }
+
+		[Required]
+		public Guid MasterCoachId { get; set; }
 	}
 }

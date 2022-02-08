@@ -16,6 +16,8 @@ namespace sportsclub_management.models.Requests.MasterCoach
 		[Required]
 		public string AadharNumber { get; set; }
 
+		[Required]
+		public Guid MasterGameId { get; set; }
 
 	}
 }

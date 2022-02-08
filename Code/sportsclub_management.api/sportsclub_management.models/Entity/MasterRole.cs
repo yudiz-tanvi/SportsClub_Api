@@ -15,6 +15,5 @@ namespace sportsclub_management.models
 		[MaxLength(50)]
 		public string Display_Name { get; set; }
 
-		public ICollection<Admin> Admin { get; set; }
 	}
 }

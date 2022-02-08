@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using sportsclub_management.api.Controllers.Base;
 using sportsclub_management.models;
 using sportsclub_management.models.Constants;
@@ -12,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace sportsclub_management.api.Controllers
 {
-	public class MasterGameController : BaseController
-	{
-        public MasterGameController(SportsClubManagementContext DbContext)  : base(DbContext)  //TODO: Explain Depedency Injection
+    public class MasterGameController : BaseController
+    {
+        public MasterGameController(SportsClubManagementContext DbContext) : base(DbContext)  //TODO: Explain Depedency Injection
         {
         }
 
@@ -29,7 +30,6 @@ namespace sportsclub_management.api.Controllers
                             //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
                             .Skip(request.PageNo * request.PageSize) // Skip records     
                             .Take(request.PageSize); // How many records select in page
-
 
             return OkResponse(response);
         }
@@ -53,13 +53,13 @@ namespace sportsclub_management.api.Controllers
             return OkResponse(response);
         }
 
-        [HttpPost(ActionConts.MasterPlayerInsert)]
-        public async Task<IActionResult> MasterPlayerInsert([FromBody] MasterGameInsertRequest request)
+        [HttpPost(ActionConts.MasterGameInsert)]
+        public async Task<IActionResult> MasterGameInsert([FromBody] MasterGameInsertRequest request)
         {
             if (!ModelState.IsValid)
                 return ErrorResponse(ModelState);
-
-            await DbContext.MasterPlayer.AddAsync(new MasterPlayer
+            
+            await DbContext.MasterGame.AddAsync(new MasterGame
             {
                 Name = request.Name,
             });
@@ -71,9 +71,9 @@ namespace sportsclub_management.api.Controllers
         [HttpPost(ActionConts.MasterGameDelete)]
         public async Task<IActionResult> MasterGameDelete([FromBody] BaseIdRequest request)
         {
-            var masterGame = DbContext.MasterGame.FirstOrDefault(x => x.Id.Equals(request.Id));
+            var MasterGame = DbContext.MasterGame.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-            DbContext.MasterGame.Remove(masterGame);
+            DbContext.MasterGame.Remove(MasterGame);
             DbContext.SaveChanges();
 
             return OkResponse();

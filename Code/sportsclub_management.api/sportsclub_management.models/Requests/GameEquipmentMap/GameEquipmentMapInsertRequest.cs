@@ -12,5 +12,11 @@ namespace sportsclub_management.models.Requests.GameEquipmentMap
 
 		[Required]
 		public string Remarks { get; set; }
+
+		[Required]
+		public Guid MasterGameId { get; set; }
+
+		[Required]
+		public Guid MasterEquipmentId { get; set; }
 	}
 }

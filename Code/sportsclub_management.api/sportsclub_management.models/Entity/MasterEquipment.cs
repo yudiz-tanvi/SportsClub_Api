@@ -14,6 +14,5 @@ namespace sportsclub_management.models
 		[Required]
 		public long Quantity { get; set; }
 
-		public ICollection<GameEquipmentMap> GameEquipmentMap { get; set; }
 	}
 }

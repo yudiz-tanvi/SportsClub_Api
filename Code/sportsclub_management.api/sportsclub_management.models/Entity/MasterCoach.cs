@@ -29,11 +29,10 @@ namespace sportsclub_management.models
 			get; set;
 		}
 
-		[ForeignKey("MasterGame")]
+		[Required]
 		public Guid MasterGameId { get; set; }
+		[ForeignKey("MasterGameId")]
 		public MasterGame MasterGame { get; set; }
-
-		public ICollection<CoachAddress> CoachAddress { get; set; }
 
 	}
 }

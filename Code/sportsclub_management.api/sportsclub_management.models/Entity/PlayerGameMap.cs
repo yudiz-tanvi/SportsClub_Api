@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -7,12 +8,14 @@ namespace sportsclub_management.models
 {
 	public class PlayerGameMap : BaseEntity
 	{
-		[ForeignKey("MasterPlayer")]
+		[Required]
 		public Guid MasterPlayerId { get; set; }
+		[ForeignKey("MasterPlayerId")]
 		public MasterPlayer MasterPlayer { get; set; }
 
-		[ForeignKey("MasterGame")]
+		[Required]
 		public Guid MasterGameId { get; set; }
+		[ForeignKey("MasterGameId")]
 		public MasterGame MasterGame { get; set; }
 	}
 }

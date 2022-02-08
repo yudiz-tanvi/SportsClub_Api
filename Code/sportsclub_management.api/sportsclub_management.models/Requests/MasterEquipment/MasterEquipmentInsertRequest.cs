@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace sportsclub_management.models.Requests.MasterEquipmentRequest
+namespace sportsclub_management.models.Requests.MasterEquipment
 {
 	public class MasterEquipmentInsertRequest
 	{
