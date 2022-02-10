@@ -79,5 +79,7 @@ namespace sportsclub_management.api.Controllers
 
             return OkResponse();
         }
+
+        
     }
 }
