@@ -2,9 +2,11 @@
 using sportsclub_management.api.Controllers.Base;
 using sportsclub_management.models;
 using sportsclub_management.models.Constants;
+using sportsclub_management.models.Map;
 using sportsclub_management.models.Requests.Base;
 using sportsclub_management.models.Requests.PlayerGameMap;
 using sportsclub_management.repository;
+using sportsclub_management.security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace sportsclub_management.api.Controllers
 {
 	public class PlayerGameMapController : BaseController
 	{
-        public PlayerGameMapController(SportsClubManagementContext DbContext) : base(DbContext)  //TODO: Explain Depedency Injection
+        public PlayerGameMapController(SportsClubManagementContext DbContext, ICrypto Crypto) : base(DbContext, Crypto)  //TODO: Explain Depedency Injection
         {
         }
 
@@ -27,6 +29,7 @@ namespace sportsclub_management.api.Controllers
 
             var response = DbContext.PlayerGameMap
                             //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
+                            .Where(x => !x.Deleted)
                             .Skip(request.PageNo * request.PageSize) // Skip records     
                             .Take(request.PageSize); // How many records select in page
 
@@ -69,12 +72,41 @@ namespace sportsclub_management.api.Controllers
             return OkResponse();
         }
 
+        [HttpPost(ActionConts.PlayerGameMapUpdate)]
+        public async Task<IActionResult> PlayerGameMapUpdateAsync([FromBody] PlayerGameMapUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return ErrorResponse(ModelState);
+
+            var playergamemap = new PlayerGameMapMap().Map(request);
+
+            DbContext.PlayerGameMap.Update(playergamemap);
+            DbContext.SaveChanges();
+
+            return OkResponse();
+        }
+
         [HttpPost(ActionConts.PlayerGameMapDelete)]
         public async Task<IActionResult> PlayerGameMapDelete([FromBody] BaseIdRequest request)
         {
             var PlayerGameMap = DbContext.PlayerGameMap.FirstOrDefault(x => x.Id.Equals(request.Id));
 
             DbContext.PlayerGameMap.Remove(PlayerGameMap);
+            DbContext.SaveChanges();
+
+            return OkResponse();
+        }
+
+        [HttpPost(ActionConts.PlayerGameMapSoftDelete)]
+        public async Task<IActionResult> PlayerGameMapSoftDelete([FromBody] BaseIdRequest request)
+        {
+            var PlayerGameMap = DbContext.PlayerGameMap.FirstOrDefault(x => x.Id.Equals(request.Id));
+
+            if (PlayerGameMap.Deleted == false)
+            {
+                PlayerGameMap.Deleted = true;
+            }
+
             DbContext.SaveChanges();
 
             return OkResponse();

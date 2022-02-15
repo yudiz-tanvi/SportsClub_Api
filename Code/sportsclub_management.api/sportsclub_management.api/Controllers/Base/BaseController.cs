@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using sportsclub_management.api.Filters;
+using sportsclub_management.models;
 using sportsclub_management.models.Constants;
 using sportsclub_management.repository;
+using sportsclub_management.security;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace sportsclub_management.api.Controllers.Base
@@ -17,11 +21,16 @@ namespace sportsclub_management.api.Controllers.Base
 	{
         #region Object Declarations and Constructor
 
-        public SportsClubManagementContext DbContext { get; set; }
+        protected SportsClubManagementContext DbContext { get; set; }
 
-        public BaseController(SportsClubManagementContext DbContext)
+        protected new Admin Admin { get; set; }
+
+        protected ICrypto Crypto { get; set; }
+
+        public BaseController(SportsClubManagementContext DbContext, ICrypto? crypto = null)
         {
             this.DbContext = DbContext;
+            this.Crypto = crypto;
         }
 
         #endregion
@@ -87,5 +96,85 @@ namespace sportsclub_management.api.Controllers.Base
         protected IActionResult ErrorMarkorResponse(object message) => BadRequest(new { message });
 
         #endregion Failed Response
+
+        #region Get current admin's data using Token
+
+        protected bool IsLoggedIn(ClaimsPrincipal Admin) => Admin.Identity.IsAuthenticated;
+
+        protected Guid GetAdminId(ClaimsPrincipal Admin)
+        {
+            var admin_id = Admin.Claims.Where(x => x.Type.Equals(JwtRegisteredClaimNames.Sid))?.FirstOrDefault().Value;
+            if (admin_id is null) return Guid.Empty;
+            return Guid.Parse(Crypto.Decrypt(admin_id));
+        }
+
+        protected string GetAdminEmail(ClaimsPrincipal Admin)
+        {
+            var email = Admin.Claims.Where(x => x.Type.Equals(ClaimTypes.Email))?.FirstOrDefault().Value;
+            if (email is null) return string.Empty;
+            return Crypto.Decrypt(email);
+        }
+
+        protected string GetAdminFullName(ClaimsPrincipal Admin)
+        {
+            var givenName = Admin.Claims.Where(x => x.Type.Equals(ClaimTypes.GivenName))?.FirstOrDefault().Value;
+            if (givenName is null) return string.Empty;
+            return Crypto.Decrypt(givenName);
+        }
+
+        protected string GetAdminName(ClaimsPrincipal Admin)
+        {
+            var adminName = Admin.Claims.Where(x => x.Type.Equals("Adminame"))?.FirstOrDefault().Value;
+            if (adminName is null) return string.Empty;
+            return Crypto.Decrypt(adminName);
+        }
+
+        protected string GetUniqueId(ClaimsPrincipal Admin)
+        {
+            var uniqueId = Admin.Claims.Where(x => x.Type.Equals(JwtRegisteredClaimNames.Jti))?.FirstOrDefault().Value;
+            if (uniqueId is null) return string.Empty;
+            return Crypto.Decrypt(uniqueId);
+        }
+
+        protected string GetAdminRole(ClaimsPrincipal Admin)
+        {
+            var role = Admin.Claims.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Role))?.Value;
+            return Crypto.Decrypt(role);
+        }
+
+        #endregion Get current admin's data using Token
+
+        #region Validate Admins
+
+        protected void ValidateAdmin(Admin admin = null)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                if (admin == null)
+                    admin = GetAdminAsync(Admin);
+            }
+            if (admin == null)
+                ErrorResponse();
+
+            if (admin.Deleted == true)
+                ErrorResponse("Admin is deleted");
+
+            if (admin.Active == false)
+                ErrorResponse("Admin is inactive");
+
+            this.Admin = admin;
+        }
+
+        private Admin GetAdminAsync(Admin admin)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected Admin GetAdminAsync(ClaimsPrincipal Admin)
+        {
+            var admin_id = GetAdminId(Admin).ToString();
+            return DbContext.Admin.FirstOrDefault(x => x.Id.ToString().Equals(admin_id));
+        }
+        #endregion Validate Admin
     }
 }
