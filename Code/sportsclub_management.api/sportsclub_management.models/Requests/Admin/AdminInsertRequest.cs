@@ -25,7 +25,7 @@ namespace sportsclub_management.models.Requests.Admin
 		[Required]
 		public string Gender { get; set; }
 
-		[Required]
+		
 		public Guid MasterRoleId { get; set; }
 	}
 }

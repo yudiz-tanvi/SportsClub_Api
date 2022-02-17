@@ -23,11 +23,11 @@ namespace sportsclub_management.api.Controllers.Base
 
         protected SportsClubManagementContext DbContext { get; set; }
 
-        protected new Admin Admin { get; set; }
+        protected Admin Admin { get; set; }
 
         protected ICrypto Crypto { get; set; }
 
-        public BaseController(SportsClubManagementContext DbContext, ICrypto? crypto = null)
+        public BaseController(SportsClubManagementContext DbContext, ICrypto crypto = null)
         {
             this.DbContext = DbContext;
             this.Crypto = crypto;
@@ -176,5 +176,7 @@ namespace sportsclub_management.api.Controllers.Base
             return DbContext.Admin.FirstOrDefault(x => x.Id.ToString().Equals(admin_id));
         }
         #endregion Validate Admin
+
+        
     }
 }

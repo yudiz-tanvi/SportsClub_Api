@@ -12,11 +12,11 @@ namespace sportsclub_management.api.Filters
 
         //protected ILogManager LogManager { get; set; }
 
-        //protected IStringLocalizer<BaseController> Localizer { get; }
+        protected IStringLocalizer<BaseController> Localizer { get; }
 
-        public ExceptionFilters()
+        public ExceptionFilters(IStringLocalizer<BaseController> Localizer)
         {
-
+            this.Localizer = Localizer;
         }
 
         //public ExceptionFilters(

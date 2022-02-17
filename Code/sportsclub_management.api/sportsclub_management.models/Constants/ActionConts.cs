@@ -8,27 +8,24 @@ namespace sportsclub_management.models.Constants
 	{
 		public const string ApiVersion = "api/v1";
 
-		public class Admin
-		{
-			public const string Login = "admin/Login";
 
-			/*public const string AdminSelectList = "admin/select_list";
+		public const string Login = "admin/Login";
 
-			public const string AdminSelectById = "admin/select_by_id";
+		public const string AdminSelectList = "admin/select_list";
 
-			public const string AdminSelectForDropdown = "admin/select_for_dropdown";
+		public const string AdminSelectById = "admin/select_by_id";
 
-			public const string AdminInsert = "admin/insert";
+		public const string AdminSelectForDropdown = "admin/select_for_dropdown";
 
-			public const string AdminUpdate = "admin/update";
+		public const string AdminInsert = "admin/insert";
 
-			public const string AdminUpdateStatus = "admin/update_status";
+		public const string AdminUpdate = "admin/update";
 
-			public const string AdminDelete = "admin/delete";
+		public const string AdminUpdateStatus = "admin/update_status";
 
-			public const string AdminSoftDelete = "admin/soft_delete";*/
-		}
+		public const string AdminDelete = "admin/delete";
 
+		public const string AdminSoftDelete = "admin/soft_delete";
 
 		public const string CoachAddressSelectList = "coachaddress/select_list";
 

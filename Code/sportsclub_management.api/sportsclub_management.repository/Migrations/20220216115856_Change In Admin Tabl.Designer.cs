@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sportsclub_management.repository;
 
 namespace sportsclub_management.repository.Migrations
 {
     [DbContext(typeof(SportsClubManagementContext))]
-    partial class SportsClubManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220216115856_Change In Admin Tabl")]
+    partial class ChangeInAdminTabl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

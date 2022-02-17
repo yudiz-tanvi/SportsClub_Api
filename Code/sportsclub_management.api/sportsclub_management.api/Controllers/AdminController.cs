@@ -26,8 +26,8 @@ namespace sportsclub_management.api.Controllers
         {
         }
 
-        #region User Login
-        [AllowAnonymous, HttpPost(ActionConts.Admin.Login)]
+        #region Admin Login
+        [AllowAnonymous, HttpPost(ActionConts.Login)]
         public IActionResult LoginAsync(
             [FromBody] LoginRequest request,
             [FromServices] IOptions<AuthConfigs> AuthConfigOptions)
@@ -37,7 +37,7 @@ namespace sportsclub_management.api.Controllers
             if (!ModelState.IsValid)
                 return ErrorResponse(ModelState);
 
-            request.Password = Crypto.Encrypt(request.Password);
+            request.Password = Crypto.EncryptPassword(request.Password);
             var dbResponse = DbContext.Admin.FirstOrDefault(x =>
                            x.Email.Equals(request.Email.Trim()) &&
                            x.Password.Equals(request.Password.Trim()));
@@ -61,11 +61,11 @@ namespace sportsclub_management.api.Controllers
             return OkResponse(response);
 
         }
-        #endregion User Login
+        #endregion Admin Login
 
         //IRepository<ApiDemoContext, CountryEntity> CountryRepository;
 
-        /*[HttpPost(ActionConts.AdminSelectList)]
+        [HttpPost(ActionConts.AdminSelectList)]
         public IActionResult AdminList([FromBody] BaseListRequest request)
         {
             if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
@@ -104,6 +104,39 @@ namespace sportsclub_management.api.Controllers
         [HttpPost(ActionConts.AdminInsert)]
         public async Task<IActionResult> AdminInsert([FromBody] AdminInsertRequest request)
         {
+
+			try
+			{
+				if (!ModelState.IsValid)
+					return ErrorResponse(ModelState);
+
+				if (DbContext.Admin.Any(x => x.Name.Equals(request.Name)))
+					return ErrorResponse("Admin Already Exists");
+
+				await DbContext.Admin.AddAsync(new Admin
+				{
+					Name = request.Name,
+					Email = request.Email,
+					Password = Crypto.EncryptPassword(request.Password),
+					Username = request.Username,
+					Mobile = request.Mobile,
+					Gender = request.Gender,
+					MasterRoleId = request.MasterRoleId,
+				});
+				DbContext.SaveChanges();
+
+				return OkResponse();
+			}
+			catch (Exception ex)
+			{
+
+                return ErrorResponse(ex.Message);
+			}
+        }
+
+        /*[HttpPost(ActionConts.AdminInsert)]
+        public async Task<IActionResult> AdminInsert([FromBody] AdminInsertRequest request)
+        {
             if (!ModelState.IsValid)
                 return ErrorResponse(ModelState);
 
@@ -114,7 +147,7 @@ namespace sportsclub_management.api.Controllers
             {
                 Name = request.Name,
                 Email = request.Email,
-                Password = request.Password,
+                Password = Crypto.EncryptPassword(request.Password),
                 Username = request.Username,
                 Mobile = request.Mobile,
                 Gender = request.Gender,
@@ -123,7 +156,7 @@ namespace sportsclub_management.api.Controllers
             DbContext.SaveChanges();
 
             return OkResponse();
-        }
+        }*/
 
         [HttpPost(ActionConts.AdminUpdate)]
         public async Task<IActionResult> AdminUpdateAsync([FromBody] AdminUpdateRequest request)
@@ -163,6 +196,6 @@ namespace sportsclub_management.api.Controllers
             DbContext.SaveChanges();
 
             return OkResponse();
-        }*/
+        }
     }
 }

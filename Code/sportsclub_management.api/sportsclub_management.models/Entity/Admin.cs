@@ -17,7 +17,7 @@ namespace sportsclub_management.models
 		public string Email { get; set; }
 
 		[Required]
-		[MaxLength(20)]
+		[MaxLength(50)]
 		public string Password { get; set; }
 
 		[Required]
