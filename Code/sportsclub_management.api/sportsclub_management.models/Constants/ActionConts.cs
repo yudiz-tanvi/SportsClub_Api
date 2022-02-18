@@ -11,6 +11,8 @@ namespace sportsclub_management.models.Constants
 
 		public const string Login = "admin/Login";
 
+		public const string Profile = "admin/profile";
+
 		public const string AdminSelectList = "admin/select_list";
 
 		public const string AdminSelectById = "admin/select_by_id";

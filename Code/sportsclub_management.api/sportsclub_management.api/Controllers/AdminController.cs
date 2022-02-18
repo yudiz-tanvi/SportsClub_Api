@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using sportsclub_management.api.Controllers.Base;
 using sportsclub_management.api.Helpers;
@@ -22,88 +23,112 @@ namespace sportsclub_management.api.Controllers
 {
 	public class AdminController : BaseController
 	{
-        public AdminController(SportsClubManagementContext DbContext, ICrypto Crypto) : base(DbContext , Crypto)  //TODO: Explain Depedency Injection
-        {
-        }
+		public AdminController(SportsClubManagementContext DbContext, ICrypto Crypto, IStringLocalizer<BaseController> Localizer)
+			: base(DbContext, Crypto, Localizer) //TODO: Explain Depedency Injection
+		{
+		}
 
-        #region Admin Login
-        [AllowAnonymous, HttpPost(ActionConts.Login)]
-        public IActionResult LoginAsync(
-            [FromBody] LoginRequest request,
-            [FromServices] IOptions<AuthConfigs> AuthConfigOptions)
-        {
-            if (request == null) request = new LoginRequest();
+		#region Admin Login
+		[AllowAnonymous, HttpPost(ActionConts.Login)]
+		public IActionResult LoginAsync(
+			[FromBody] LoginRequest request,
+			[FromServices] IOptions<AuthConfigs> AuthConfigOptions)
+		{
+			if (request == null) request = new LoginRequest();
 
-            if (!ModelState.IsValid)
-                return ErrorResponse(ModelState);
+			if (!ModelState.IsValid)
+				return ErrorResponse(ModelState);
 
-            request.Password = Crypto.EncryptPassword(request.Password);
-            var dbResponse = DbContext.Admin.FirstOrDefault(x =>
-                           x.Email.Equals(request.Email.Trim()) &&
-                           x.Password.Equals(request.Password.Trim()));
+			request.Password = Crypto.EncryptPassword(request.Password);
+			var dbResponse = DbContext.Admin.FirstOrDefault(x =>
+						   x.Email.Equals(request.Email.Trim()) &&
+						   x.Password.Equals(request.Password.Trim()));
 
-            if (dbResponse is null) return ErrorResponse();
+			if (dbResponse is null) return ErrorResponse();
 
-            ValidateAdmin(dbResponse);
+			ValidateAdmin(dbResponse);
 
-            var response = new LoginResponse
-            {
-                Id = dbResponse.Id,
-                Name = dbResponse.Name,
-                Username = dbResponse.Username,
-                Email = dbResponse.Email,
-                Mobile = dbResponse.Mobile,
-                Created = dbResponse.Created,
-                Modified = dbResponse.Modified,
-            };
+			var response = new LoginResponse
+			{
+				Id = dbResponse.Id,
+				Name = dbResponse.Name,
+				Username = dbResponse.Username,
+				Email = dbResponse.Email,
+				Mobile = dbResponse.Mobile,
+				Created = dbResponse.Created,
+				Modified = dbResponse.Modified,
+			};
 
-            response.Token = new TokenHelpers(Crypto).GetAccessToken(AuthConfigOptions.Value, response);
-            return OkResponse(response);
+			response.Token = new TokenHelpers(Crypto).GetAccessToken(AuthConfigOptions.Value, response);
+			return OkResponse(response);
 
-        }
-        #endregion Admin Login
+		}
+		#endregion Admin Login
 
-        //IRepository<ApiDemoContext, CountryEntity> CountryRepository;
+		#region 3. Profile
 
-        [HttpPost(ActionConts.AdminSelectList)]
-        public IActionResult AdminList([FromBody] BaseListRequest request)
-        {
-            if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
+		[Authorize, HttpGet(ActionConts.Profile)]
+		public IActionResult ProfileAsync()
+		{
 
-            var response = DbContext.Admin
-                            //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
-                            .Where(x => !x.Deleted)
-                            .Skip(request.PageNo * request.PageSize) // Skip records     
-                            .Take(request.PageSize); // How many records select in page
+			ValidateAdmin(null);
+
+			var response = new
+			{
+				Admin.Id,
+				Admin.Email,
+				Admin.Mobile,
+				Admin.Username,
+				Admin.Name
+			};
+
+			return OkResponse(response);
+
+		}
+
+		#endregion
+
+		//IRepository<ApiDemoContext, CountryEntity> CountryRepository;
+
+		[HttpPost(ActionConts.AdminSelectList)]
+		public IActionResult AdminList([FromBody] BaseListRequest request)
+		{
+			if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
+
+			var response = DbContext.Admin
+							//.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
+							.Where(x => !x.Deleted)
+							.Skip(request.PageNo * request.PageSize) // Skip records     
+							.Take(request.PageSize); // How many records select in page
 
 
-            return OkResponse(response);
-        }
+			return OkResponse(response);
+		}
 
-        [HttpPost(ActionConts.AdminSelectById)]
-        public IActionResult AdminSelectById([FromBody] BaseRequiredIdRequest request)
-        {
-            if (!ModelState.IsValid)
-                return ErrorResponse(ModelState);
+		[HttpPost(ActionConts.AdminSelectById)]
+		public IActionResult AdminSelectById([FromBody] BaseRequiredIdRequest request)
+		{
+			if (!ModelState.IsValid)
+				return ErrorResponse(ModelState);
 
-            var response = DbContext.Admin.FirstOrDefault(x => x.Id.Equals(request.Id));
+			var response = DbContext.Admin.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-            return OkResponse(response);
-        }
+			return OkResponse(response);
+		}
 
-        [HttpPost(ActionConts.AdminSelectForDropdown)]
-        public IActionResult AdminSelectForDropdown()
-        {
-            var response = DbContext.Admin
-                .Where(x => !x.Deleted && x.Active)
-                .Select(x => new { x.Name, x.Id });
+		[HttpPost(ActionConts.AdminSelectForDropdown)]
+		public IActionResult AdminSelectForDropdown()
+		{
+			var response = DbContext.Admin
+				.Where(x => !x.Deleted && x.Active)
+				.Select(x => new { x.Name, x.Id });
 
-            return OkResponse(response);
-        }
+			return OkResponse(response);
+		}
 
-        [HttpPost(ActionConts.AdminInsert)]
-        public async Task<IActionResult> AdminInsert([FromBody] AdminInsertRequest request)
-        {
+		[HttpPost(ActionConts.AdminInsert)]
+		public async Task<IActionResult> AdminInsert([FromBody] AdminInsertRequest request)
+		{
 
 			try
 			{
@@ -130,11 +155,11 @@ namespace sportsclub_management.api.Controllers
 			catch (Exception ex)
 			{
 
-                return ErrorResponse(ex.Message);
+				return ErrorResponse(ex.Message);
 			}
-        }
+		}
 
-        /*[HttpPost(ActionConts.AdminInsert)]
+		/*[HttpPost(ActionConts.AdminInsert)]
         public async Task<IActionResult> AdminInsert([FromBody] AdminInsertRequest request)
         {
             if (!ModelState.IsValid)
@@ -158,44 +183,44 @@ namespace sportsclub_management.api.Controllers
             return OkResponse();
         }*/
 
-        [HttpPost(ActionConts.AdminUpdate)]
-        public async Task<IActionResult> AdminUpdateAsync([FromBody] AdminUpdateRequest request)
-        {
-            if (!ModelState.IsValid)
-                return ErrorResponse(ModelState);
+		[HttpPost(ActionConts.AdminUpdate)]
+		public async Task<IActionResult> AdminUpdateAsync([FromBody] AdminUpdateRequest request)
+		{
+			if (!ModelState.IsValid)
+				return ErrorResponse(ModelState);
 
-            var admin = new AdminMap().Map(request);
+			var admin = new AdminMap().Map(request);
 
-            DbContext.Admin.Update(admin);
-            DbContext.SaveChanges();
+			DbContext.Admin.Update(admin);
+			DbContext.SaveChanges();
 
-            return OkResponse();
-        }
+			return OkResponse();
+		}
 
-        [HttpPost(ActionConts.AdminDelete)]
-        public async Task<IActionResult> AdminDelete([FromBody] BaseIdRequest request)
-        {
-            var Admin = DbContext.Admin.FirstOrDefault(x => x.Id.Equals(request.Id));
+		[HttpPost(ActionConts.AdminDelete)]
+		public async Task<IActionResult> AdminDelete([FromBody] BaseIdRequest request)
+		{
+			var Admin = DbContext.Admin.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-            DbContext.Admin.Remove(Admin);
-            DbContext.SaveChanges();
+			DbContext.Admin.Remove(Admin);
+			DbContext.SaveChanges();
 
-            return OkResponse();
-        }
+			return OkResponse();
+		}
 
-        [HttpPost(ActionConts.AdminSoftDelete)]
-        public async Task<IActionResult> AdminSoftDelete([FromBody] BaseIdRequest request)
-        {
-            var Admin = DbContext.Admin.FirstOrDefault(x => x.Id.Equals(request.Id));
+		[HttpPost(ActionConts.AdminSoftDelete)]
+		public async Task<IActionResult> AdminSoftDelete([FromBody] BaseIdRequest request)
+		{
+			var Admin = DbContext.Admin.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-            if (Admin.Deleted == false)
-            {
-                Admin.Deleted = true;
-            }
+			if (Admin.Deleted == false)
+			{
+				Admin.Deleted = true;
+			}
 
-            DbContext.SaveChanges();
+			DbContext.SaveChanges();
 
-            return OkResponse();
-        }
-    }
+			return OkResponse();
+		}
+	}
 }

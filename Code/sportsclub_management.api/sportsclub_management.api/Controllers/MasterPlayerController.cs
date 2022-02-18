@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using sportsclub_management.api.Controllers.Base;
 using sportsclub_management.models;
 using sportsclub_management.models.Constants;
@@ -18,7 +19,8 @@ namespace sportsclub_management.api.Controllers
 {
 	public class MasterPlayerController : BaseController
 	{
-        public MasterPlayerController(SportsClubManagementContext DbContext, ICrypto Crypto) : base(DbContext, Crypto)  //TODO: Explain Depedency Injection
+        public MasterPlayerController(SportsClubManagementContext DbContext, ICrypto Crypto, IStringLocalizer<BaseController> Localizer)
+            : base(DbContext, Crypto, Localizer)  //TODO: Explain Depedency Injection
         {
         }
 

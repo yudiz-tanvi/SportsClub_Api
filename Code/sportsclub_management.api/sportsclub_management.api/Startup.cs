@@ -1,19 +1,25 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using sportsclub_management.api.Filters;
 using sportsclub_management.api.Helpers;
+using sportsclub_management.models;
 using sportsclub_management.models.Configs;
 using sportsclub_management.repository;
 using sportsclub_management.security;
 using sportsclub_management.security.implementations;
 using System;
+using System.Globalization;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace sportsclub_management.api
 {
@@ -25,6 +31,7 @@ namespace sportsclub_management.api
 		}
 
 		public IConfiguration Configuration { get; }
+		public static string CurrentLanguage { get; set; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -76,6 +83,27 @@ namespace sportsclub_management.api
 
 			#endregion Swagger Configuration
 
+			#region Language translate
+
+			services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+			services.Configure<RequestLocalizationOptions>(options =>
+			{
+				var supportedCultures = new[] { new CultureInfo(LanguageConst.English), new CultureInfo(LanguageConst.Hindi) };
+				options.DefaultRequestCulture = new RequestCulture(culture: LanguageConst.English, uiCulture: LanguageConst.English);
+				options.SupportedCultures = supportedCultures;
+				options.SupportedUICultures = supportedCultures;
+				options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(context =>
+				{
+					var userLangs = context.Request.Headers["Accept-Language"].ToString();
+					var firstLang = userLangs.Split(',').FirstOrDefault();
+					CurrentLanguage = (string.IsNullOrEmpty(firstLang) || (firstLang != LanguageConst.English && firstLang != LanguageConst.Hindi)) ? LanguageConst.English : firstLang;
+					return Task.FromResult(new ProviderCultureResult(CurrentLanguage, CurrentLanguage));
+				}));
+			});
+
+			#endregion Language translate
+
 			#region Configs Initializations
 
 			services.Configure<AuthConfigs>(Configuration.GetSection("AuthConfigs"));
@@ -102,6 +130,9 @@ namespace sportsclub_management.api
 				app.UseDeveloperExceptionPage();
 			}
 
+			var localizationOption = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+			app.UseRequestLocalization(localizationOption.Value);
+
 			seed.Seed().Wait(); // Call Seed Method in Startup
 
 			app.UseSwagger().UseSwaggerUI(c =>
@@ -111,6 +142,7 @@ namespace sportsclub_management.api
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using sportsclub_management.api.Filters;
 using sportsclub_management.models;
 using sportsclub_management.models.Constants;
@@ -27,10 +28,13 @@ namespace sportsclub_management.api.Controllers.Base
 
         protected ICrypto Crypto { get; set; }
 
-        public BaseController(SportsClubManagementContext DbContext, ICrypto crypto = null)
+        protected IStringLocalizer<BaseController> Localizer { get; set; }
+
+        public BaseController(SportsClubManagementContext DbContext, ICrypto Crypto, IStringLocalizer<BaseController> Localizer)
         {
             this.DbContext = DbContext;
-            this.Crypto = crypto;
+            this.Crypto = Crypto;
+            this.Localizer = Localizer;
         }
 
         #endregion
@@ -41,7 +45,7 @@ namespace sportsclub_management.api.Controllers.Base
         {
             meta = new
             {
-                message = "Your Request Has Been Performed Successfully",
+                message = Localizer["ok_response_successful"].Value,
                 statusCode = 200
             }
         });
@@ -59,7 +63,7 @@ namespace sportsclub_management.api.Controllers.Base
 
         protected IActionResult OkResponse(object data) => Ok(new
         {
-            meta = new { message = "Your Request Has Been Performed Successfully", statusCode = 200 },
+            meta = new { message = Localizer["ok_response_successful"].Value, statusCode = 200 },
             data = data
         });
 
@@ -68,7 +72,7 @@ namespace sportsclub_management.api.Controllers.Base
             var data = new { details };
             return Ok(new
             {
-                meta = new { message = "Your Request Has Been Performed Successfully", statusCode = 200 },
+                meta = new { message = Localizer["ok_response_successful"].Value, statusCode = 200 },
                 data
             });
         }
@@ -151,7 +155,7 @@ namespace sportsclub_management.api.Controllers.Base
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 if (admin == null)
-                    admin = GetAdminAsync(Admin);
+                    admin = GetAdminAsync(User);
             }
             if (admin == null)
                 ErrorResponse();
@@ -165,10 +169,10 @@ namespace sportsclub_management.api.Controllers.Base
             this.Admin = admin;
         }
 
-        private Admin GetAdminAsync(Admin admin)
-        {
-            throw new NotImplementedException();
-        }
+        //private Admin GetAdminAsync(Admin admin)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         protected Admin GetAdminAsync(ClaimsPrincipal Admin)
         {
