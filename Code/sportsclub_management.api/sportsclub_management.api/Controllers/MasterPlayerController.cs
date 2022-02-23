@@ -32,7 +32,7 @@ namespace sportsclub_management.api.Controllers
             if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
 
             var response = DbContext.MasterPlayer
-                            //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
+                            .Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && (x.Name.Contains(request.SearchParam) || x.Email.Contains(request.SearchParam))))  // Search
                             .Where(x => !x.Deleted)
                             .Skip(request.PageNo * request.PageSize) // Skip records     
                             .Take(request.PageSize); // How many records select in page
@@ -67,7 +67,7 @@ namespace sportsclub_management.api.Controllers
             if (!ModelState.IsValid)
                 return ErrorResponse(ModelState);
 
-            if (DbContext.MasterPlayer.Any(x => x.AadharNumber.Equals(request.Name)))
+            if (DbContext.MasterPlayer.Any(x => x.AadharNumber.Equals(request.AadharNumber)))
                 return ErrorResponse("Aadhar Number Already Exists");
 
             await DbContext.MasterPlayer.AddAsync(new MasterPlayer

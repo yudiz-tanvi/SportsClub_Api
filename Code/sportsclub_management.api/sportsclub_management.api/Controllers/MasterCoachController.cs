@@ -16,109 +16,123 @@ using System.Threading.Tasks;
 namespace sportsclub_management.api.Controllers
 {
 	public class MasterCoachController : BaseController
-    {
-        public MasterCoachController(SportsClubManagementContext DbContext, ICrypto Crypto, IStringLocalizer<BaseController> Localizer)
-            : base(DbContext, Crypto, Localizer)  //TODO: Explain Depedency Injection
-        {
-        }
+	{
+		public MasterCoachController(SportsClubManagementContext DbContext, ICrypto Crypto, IStringLocalizer<BaseController> Localizer)
+			: base(DbContext, Crypto, Localizer)  //TODO: Explain Depedency Injection
+		{
+		}
 
-        //IRepository<ApiDemoContext, CountryEntity> CountryRepository;
+		//IRepository<ApiDemoContext, CountryEntity> CountryRepository;
 
-        [HttpPost(ActionConts.MasterCoachSelectList)]
-        public IActionResult MasterCoachList([FromBody] BaseListRequest request)
-        {
-            if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
+		[HttpPost(ActionConts.MasterCoachSelectList)]
+		public IActionResult MasterCoachList([FromBody] MasterCoachListRequest request)
+		{
+			if (request == null) request = new MasterCoachListRequest(); // TODO: Explain the usage
 
-            var response = DbContext.MasterCoach
-                            //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
-                            .Where(x => !x.Deleted)
-                            .Skip(request.PageNo * request.PageSize) // Skip records     
-                            .Take(request.PageSize); // How many records select in page
+			var response = DbContext.MasterCoach;
+							
+								 if(!String.IsNullOrEmpty(request.SearchParam))
+								{
+									response.Where(x => x.Name.Contains(request.Search_By_Name));
+								}
+								else if (!String.IsNullOrEmpty(request.SearchParam))
+								{
+									response.Where(x => x.Name.Contains(request.Search_By_AadharNumber));
+								};
+							response.Where(x => !x.Deleted);
+							response.Skip(request.PageNo * request.PageSize) // Skip records     
+							.Take(request.PageSize); // How many records select in page
 
-            return OkResponse(response);
-        }
+			//.Where(x=>(!string.IsNullOrEmpty(request.Search_By_Name) && x.Name.Contains(request.Search_By_Name)))
+			//.Where(x => (!string.IsNullOrEmpty(request.Search_By_AadharNumber) && x.AadharNumber.Contains(request.Search_By_AadharNumber)))// Search
+			//.Where(x => !x.Deleted)
+			//.Skip(request.PageNo * request.PageSize) // Skip records     
+			//.Take(request.PageSize); // How many records select in page
 
-        [HttpPost(ActionConts.MasterCoachSelectById)]
-        public IActionResult MasterCoachSelectById([FromBody] BaseIdRequest request)
-        {
-            if (!ModelState.IsValid)
-                return ErrorResponse(ModelState);
+			return OkResponse(response);
+		}
 
-            var response = DbContext.MasterCoach.FirstOrDefault(x => x.Id.Equals(request.Id));
+		[HttpPost(ActionConts.MasterCoachSelectById)]
+		public IActionResult MasterCoachSelectById([FromBody] BaseIdRequest request)
+		{
+			if (!ModelState.IsValid)
+				return ErrorResponse(ModelState);
 
-            return OkResponse(response);
-        }
+			var response = DbContext.MasterCoach.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-        [HttpPost(ActionConts.MasterCoachSelectForDropdown)]
-        public IActionResult MasterCoachSelectForDropdown()
-        {
-            var response = DbContext.MasterCoach
-                .Where(x => !x.Deleted && x.Active)
-                .Select(x => new { x.Name, x.Id });
+			return OkResponse(response);
+		}
 
-            return OkResponse(response);
-        }
+		[HttpPost(ActionConts.MasterCoachSelectForDropdown)]
+		public IActionResult MasterCoachSelectForDropdown()
+		{
+			var response = DbContext.MasterCoach
+				.Where(x => !x.Deleted && x.Active)
+				.Select(x => new { x.Name, x.Id });
 
-        [HttpPost(ActionConts.MasterCoachInsert)]
-        public async Task<IActionResult> MasterCoachInsert([FromBody] MasterCoachInsertRequest request)
-        {
-            if (!ModelState.IsValid)
-                return ErrorResponse(ModelState);
+			return OkResponse(response);
+		}
 
-            if (DbContext.MasterCoach.Any(x => x.AadharNumber.Equals(request.Name)))
-                return ErrorResponse("AadharNumber Already Exists");
+		[HttpPost(ActionConts.MasterCoachInsert)]
+		public async Task<IActionResult> MasterCoachInsert([FromBody] MasterCoachInsertRequest request)
+		{
+			if (!ModelState.IsValid)
+				return ErrorResponse(ModelState);
 
-            await DbContext.MasterCoach.AddAsync(new MasterCoach
-            {
-                Name = request.Name,
-                Mobile = request.Mobile,
-                AadharNumber = request.AadharNumber,
-                MasterGameId = request.MasterGameId,
+			if (DbContext.MasterCoach.Any(x => x.AadharNumber.Equals(request.Name)))
+				return ErrorResponse("AadharNumber Already Exists");
 
-            });
-            DbContext.SaveChanges();
+			await DbContext.MasterCoach.AddAsync(new MasterCoach
+			{
+				Name = request.Name,
+				Mobile = request.Mobile,
+				AadharNumber = request.AadharNumber,
+				MasterGameId = request.MasterGameId,
 
-            return OkResponse();
-        }
+			});
+			DbContext.SaveChanges();
 
-        [HttpPost(ActionConts.MasterCoachUpdate)]
-        public async Task<IActionResult> MasterCoachUpdateAsync([FromBody] MasterCoachUpdateRequest request)
-        {
-            if (!ModelState.IsValid)
-                return ErrorResponse(ModelState);
+			return OkResponse();
+		}
 
-            var mastercoach = new MasterCoachMap().Map(request);
+		[HttpPost(ActionConts.MasterCoachUpdate)]
+		public async Task<IActionResult> MasterCoachUpdateAsync([FromBody] MasterCoachUpdateRequest request)
+		{
+			if (!ModelState.IsValid)
+				return ErrorResponse(ModelState);
 
-            DbContext.MasterCoach.Update(mastercoach);
-            DbContext.SaveChanges();
+			var mastercoach = new MasterCoachMap().Map(request);
 
-            return OkResponse();
-        }
+			DbContext.MasterCoach.Update(mastercoach);
+			DbContext.SaveChanges();
 
-        [HttpPost(ActionConts.MasterCoachDelete)]
-        public async Task<IActionResult> MasterCoachDelete([FromBody] BaseIdRequest request)
-        {
-            var MasterCoach = DbContext.MasterCoach.FirstOrDefault(x => x.Id.Equals(request.Id));
+			return OkResponse();
+		}
 
-            DbContext.MasterCoach.Remove(MasterCoach);
-            DbContext.SaveChanges();
+		[HttpPost(ActionConts.MasterCoachDelete)]
+		public async Task<IActionResult> MasterCoachDelete([FromBody] BaseIdRequest request)
+		{
+			var MasterCoach = DbContext.MasterCoach.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-            return OkResponse();
-        }
+			DbContext.MasterCoach.Remove(MasterCoach);
+			DbContext.SaveChanges();
 
-        [HttpPost(ActionConts.MasterCoachSoftDelete)]
-        public async Task<IActionResult> MasterCoachSoftDelete([FromBody] BaseIdRequest request)
-        {
-            var MasterCoach = DbContext.MasterCoach.FirstOrDefault(x => x.Id.Equals(request.Id));
+			return OkResponse();
+		}
 
-            if (MasterCoach.Deleted == false)
-            {
-                MasterCoach.Deleted = true;
-            }
+		[HttpPost(ActionConts.MasterCoachSoftDelete)]
+		public async Task<IActionResult> MasterCoachSoftDelete([FromBody] BaseIdRequest request)
+		{
+			var MasterCoach = DbContext.MasterCoach.FirstOrDefault(x => x.Id.Equals(request.Id));
 
-            DbContext.SaveChanges();
+			if (MasterCoach.Deleted == false)
+			{
+				MasterCoach.Deleted = true;
+			}
 
-            return OkResponse();
-        }
-    }
+			DbContext.SaveChanges();
+
+			return OkResponse();
+		}
+	}
 }

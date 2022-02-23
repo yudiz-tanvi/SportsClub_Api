@@ -31,7 +31,7 @@ namespace sportsclub_management.api
 		}
 
 		public IConfiguration Configuration { get; }
-		public static string CurrentLanguage { get; set; }
+		//public static string CurrentLanguage { get; set; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -89,7 +89,11 @@ namespace sportsclub_management.api
 
 			services.Configure<RequestLocalizationOptions>(options =>
 			{
-				var supportedCultures = new[] { new CultureInfo(LanguageConst.English), new CultureInfo(LanguageConst.Hindi) };
+				var supportedCultures = new[] {
+					new CultureInfo(LanguageConst.English),
+					new CultureInfo(LanguageConst.Hindi),
+					new CultureInfo(LanguageConst.Gujarati)
+				};
 				options.DefaultRequestCulture = new RequestCulture(culture: LanguageConst.English, uiCulture: LanguageConst.English);
 				options.SupportedCultures = supportedCultures;
 				options.SupportedUICultures = supportedCultures;
@@ -97,8 +101,7 @@ namespace sportsclub_management.api
 				{
 					var userLangs = context.Request.Headers["Accept-Language"].ToString();
 					var firstLang = userLangs.Split(',').FirstOrDefault();
-					CurrentLanguage = (string.IsNullOrEmpty(firstLang) || (firstLang != LanguageConst.English && firstLang != LanguageConst.Hindi)) ? LanguageConst.English : firstLang;
-					return Task.FromResult(new ProviderCultureResult(CurrentLanguage, CurrentLanguage));
+					return Task.FromResult(new ProviderCultureResult(firstLang, firstLang));
 				}));
 			});
 

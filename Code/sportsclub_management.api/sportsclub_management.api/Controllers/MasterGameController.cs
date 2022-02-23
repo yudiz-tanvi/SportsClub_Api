@@ -26,13 +26,13 @@ namespace sportsclub_management.api.Controllers
         //IRepository<ApiDemoContext, CountryEntity> CountryRepository;
 
         [HttpPost(ActionConts.MasterGameSelectList)]
-        public IActionResult MasterGameList([FromBody] BaseListRequest request)
+        public IActionResult MasterGameList([FromBody] MasterGameListRequest request)
         {
-            if (request == null) request = new BaseListRequest(); // TODO: Explain the usage
+            if (request == null) request = new MasterGameListRequest(); // TODO: Explain the usage
 
             
             var response = DbContext.MasterGame
-                            //.Where(x=>(!string.IsNullOrEmpty(request.SearchParam) && x.Name.Contains(request.SearchParam)))  // Search
+                            .Where(x=>(!string.IsNullOrEmpty(request.Name) && x.Name.Contains(request.Name)))  // Search
                             .Where(x=>!x.Deleted)
                             .Skip(request.PageNo * request.PageSize) // Skip records     
                             .Take(request.PageSize); // How many records select in page
